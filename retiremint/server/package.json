@@ -3,10 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.2.0",
-    "@testing-library/user-event": "^13.5.0",
     "axios": "^1.9.0",
     "cheerio": "^1.0.0",
     "cors": "^2.8.5",
@@ -16,35 +12,12 @@
     "mongoose": "^8.13.0",
     "multer": "^1.4.5-lts.2",
     "node": "^23.11.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4",
     "yarn": "^1.22.22"
   },
   "scripts": {
     "start:local-insecure": "cross-env ALLOW_SELF_SIGNED_CERTS=true node server.js",
     "start": "node server.js",
-    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js"
   },
   "devDependencies": {
     "@eslint/js": "^9.24.0",
