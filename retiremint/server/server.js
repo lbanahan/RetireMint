@@ -7,6 +7,11 @@ const path = require('path');
 const multer = require('multer');
 const { fetchAllCollections, fetchAndLogModelData } = require('./src/FetchModelData'); // Import fetchAllCollections and fetchAndLogModelData
 
+if (process.env.NODE_ENV !== 'production' && process.env.ALLOW_SELF_SIGNED_CERTS === 'true') {
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+  console.warn('TLS certificate verification is disabled for local development.');
+}
+
 // initialize app
 const app = express();
 const port = 8000;

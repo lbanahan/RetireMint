@@ -23,8 +23,8 @@
     "yarn": "^1.22.22"
   },
   "scripts": {
-    "start": "cross-env PORT=8000 react-scripts start",
-    "build": "react-scripts build",
+    "start:local-insecure": "cross-env ALLOW_SELF_SIGNED_CERTS=true node server.js",
+    "start": "node server.js",
     "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
     "eject": "react-scripts eject"
   },
