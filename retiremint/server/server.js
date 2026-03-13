@@ -15,6 +15,7 @@ if (process.env.NODE_ENV !== 'production' && process.env.ALLOW_SELF_SIGNED_CERTS
 // initialize app
 const app = express();
 const port = 8000;
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 
 // middleware
 app.use(cors({
@@ -149,12 +150,16 @@ app.get('/api/test-db', async (req, res) => {
 
 app.post('/login',async function(req,res){
     console.log('Login request received:', req.body);
-    const clientId = req.body.clientId;
     const token = req.body.credential;
     
-    if (!token || !clientId) {
-        console.error('Missing token or client ID');
-        return res.status(400).json({ error: 'Missing token or client ID' });
+    if (!token) {
+        console.error('Missing token');
+        return res.status(400).json({ error: 'Missing token' });
+    }
+
+    if (!GOOGLE_CLIENT_ID) {
+        console.error('Server misconfiguration: GOOGLE_CLIENT_ID is not set');
+        return res.status(500).json({ error: 'Server authentication is not configured' });
     }
     
     const client = new OAuth2Client();
@@ -163,7 +168,7 @@ app.post('/login',async function(req,res){
         console.log('Verifying token with Google...');
         const ticket = await client.verifyIdToken({
             idToken: token,
-            audience: clientId,
+            audience: GOOGLE_CLIENT_ID,
         });
     
         const payload = ticket.getPayload();

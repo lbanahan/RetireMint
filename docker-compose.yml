@@ -1,0 +1,14 @@
+services:
+  mongodb:
+    image: mongo:7
+    container_name: retiremint-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - retiremint-mongo-data:/data/db
+      - retiremint-mongo-config:/data/configdb
+    restart: unless-stopped
+
+volumes:
+  retiremint-mongo-data:
+  retiremint-mongo-config:

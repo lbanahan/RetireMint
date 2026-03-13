@@ -10,6 +10,7 @@ The platform features an intuitive React-based frontend where users can build sc
 - [Technologies Used](#technologies-used)
 - [Project Structure](#project-structure)
 - [Setup Instructions](#setup-instructions)
+- [Backend Docker Notes](retiremint/server/README.md)
 - [How It Works](#how-it-works)
 - [Key Features](#key-features)
 - [API Endpoints](#api-endpoints)
@@ -158,13 +159,19 @@ RetireMint/
    npm install
    ```
 
-4. **Start MongoDB**
+4. **Configure environment variables for Google OAuth**
+   - In `retiremint/client/.env`, set:
+     - `VITE_GOOGLE_CLIENT_ID=<your_google_oauth_web_client_id>`
+   - In your shell (or process manager) before starting the backend, set:
+     - `GOOGLE_CLIENT_ID=<your_google_oauth_web_client_id>`
+
+5. **Start MongoDB**
    ```bash
    mongod
    ```
    This starts the MongoDB server on the default port (27017). The database name is `retiremint`.
 
-5. **Start the backend server**
+6. **Start the backend server**
    ```bash
    cd retiremint/server
    npm start
@@ -181,7 +188,7 @@ RetireMint/
    - Initialize federal tax data (income tax, standard deductions, capital gains)
    - Start listening on port 8000
 
-6. **Start the frontend application**
+7. **Start the frontend application**
    ```bash
    cd retiremint/client
    npm run dev
