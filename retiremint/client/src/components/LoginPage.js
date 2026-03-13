@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import Header from './HeaderComp';
 import '../Stylesheets/LoginPage.css';
 
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+
 function LoginPage() {
     const navigate = useNavigate();
     const googleButtonRef = useRef(null);
@@ -30,11 +33,17 @@ function LoginPage() {
 
         // Initialize Google Sign-In
         const initializeGoogleSignIn = () => {
+            if (!GOOGLE_CLIENT_ID) {
+                console.error('Missing VITE_GOOGLE_CLIENT_ID');
+                setError('Google Sign-In is not configured. Please contact support.');
+                return;
+            }
+
             if (window.google) {
                 console.log('Initializing Google Sign-In...');
                 try {
                     window.google.accounts.id.initialize({
-                        client_id: '682091940238-s9o9l1c59f1ucofl0mle0gn7k9vfp2cu.apps.googleusercontent.com',
+                        client_id: GOOGLE_CLIENT_ID,
                         callback: handleCredentialResponse,
                         auto_select: false,
                         cancel_on_tap_outside: true,
@@ -86,14 +95,13 @@ function LoginPage() {
         setError(null);
         
         // Post to backend for verification
-        fetch('http://localhost:8000/login', {
+        fetch(`${API_BASE_URL}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                credential: response.credential,
-                clientId: '682091940238-s9o9l1c59f1ucofl0mle0gn7k9vfp2cu.apps.googleusercontent.com'
+                credential: response.credential
             }),
         })
         .then(response => {
