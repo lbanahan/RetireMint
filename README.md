@@ -19,7 +19,7 @@ The platform features an intuitive React-based frontend where users can build sc
 RetireMint follows a **MERN stack** architecture (MongoDB, Express, React, Node.js) with a clear separation between frontend and backend:
 
 ### Frontend (`retiremint/client/`)
-- **React 19** application running on port 3000
+- **React 19 + Vite** application running on port 3000
 - Component-based architecture with reusable UI components
 - Uses React Router for navigation
 - Integrates with multiple charting libraries (Recharts, Plotly.js, Chart.js) for data visualization
@@ -167,7 +167,12 @@ RetireMint/
 5. **Start the backend server**
    ```bash
    cd retiremint/server
-   node server.js
+   npm start
+   ```
+   If you need to allow self-signed certificates locally:
+   ```bash
+   cd retiremint/server
+   npm run start:local-insecure
    ```
    The server will:
    - Connect to MongoDB at `mongodb://localhost:27017/retiremint`
@@ -178,10 +183,10 @@ RetireMint/
 
 6. **Start the frontend application**
    ```bash
-   cd retiremint
-   npm start
+   cd retiremint/client
+   npm run dev
    ```
-   This starts the React development server on port 3000.
+   This starts the Vite development server on port 3000.
 
 ### Running the Application
 
@@ -190,7 +195,7 @@ Once all three services are running:
 - **Backend API**: Available at [http://localhost:8000](http://localhost:8000)
 - **MongoDB**: Running on `localhost:27017`
 
-**Note**: All three commands (`mongod`, `node server.js`, and `npm start`) must be running simultaneously for the application to work properly.
+**Note**: All three commands (`mongod`, `npm start` (or `npm run start:local-insecure`), and `npm run dev`) must be running simultaneously for the application to work properly.
 
 ## How It Works
 
